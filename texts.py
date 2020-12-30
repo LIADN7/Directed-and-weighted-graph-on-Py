@@ -1,7 +1,14 @@
 
+from Location import Location
+from Node import Node
 
-my_dict = {1: 'apple', 2: 'ball'}
-my_dict[3]="liad"
-my_dict[3]="li"
+s = Location(1.0)
+n1 = Node(s)
+n2 = Node(s)
+n3 = Node(s)
+print(n3.getKey())
 
-print(my_dict)
+
+
+
+

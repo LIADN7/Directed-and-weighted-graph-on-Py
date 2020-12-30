@@ -1,11 +1,11 @@
-
+from Location import Location
 
 
 class Node:
-    __defKey=0
+    defKey=0
 
 
-    def __init__(self,  local, tag=0, nw=0.0, info="", key= __defKey):
+    def __init__(self,  local: Location, tag=0, nw=0.0, info=""):
         self.__key = Node.defKey
         Node.defKey = Node.defKey + 1
         self.__local = local
@@ -19,7 +19,7 @@ class Node:
     def getLocal(self):
         return self.__local
 
-    def setLocal(self, local):
+    def setLocal(self, local: Location):
         self.__local=local
 
     def getWeight(self) -> float:
