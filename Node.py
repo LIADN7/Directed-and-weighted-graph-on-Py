@@ -10,10 +10,19 @@ class Node:
         self.__tag = tag
         self.__nw = nw
         self.__info = info
-
         self.__forw = dict()
         self.__back = dict()
+        self.__prev = -1
 
+    def __str__(self):
+        return f"{{key: {self.__key}, local: {self.__local}, tag: {self.__tag}, weight: {self.__nw}, info: {self.__info}" \
+               f"forw: {self.__forw}, back: {self.__back}}}"
+
+    def __repr__(self):
+        return f"key: {self.__key}, local: {self.__local}, tag: {self.__tag}, weight: {self.__nw}, info: {self.__info}" \
+               f"forw: {self.__forw}, back: {self.__back}"
+
+# ("{" + str(self.__key) +','+ str(self.__local) + ','+ str(self.__tag)+','+str(self.__nw)+','+self.__info+'}')
     def getKey(self) -> int:
         return self.__key
 
@@ -71,6 +80,10 @@ class Node:
             return True
         return False
 
+    def getPrev(self):
+        return self.__prev
 
+    def setPrev(self, prev: int):
+        self.__prev = prev
 
 
