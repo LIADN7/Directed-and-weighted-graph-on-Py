@@ -2,21 +2,22 @@ from Location import Location
 
 
 class Node:
-    defKey=0
+    defKey = 0
 
-
-    def __init__(self,  local: Location, tag=0, nw=0.0, info=""):
-        self.__key = Node.defKey
-        Node.defKey = Node.defKey + 1
+    def __init__(self, Key: int,  local= Location(0.0, 0.0, 0.0), tag=0, nw=0.0, info=""):
+        self.__key = Key
         self.__local = local
         self.__tag = tag
         self.__nw = nw
         self.__info = info
 
+        self.__forw = dict()
+        self.__back = dict()
+
     def getKey(self) -> int:
         return self.__key
 
-    def getLocal(self):
+    def getLocal(self) -> Location:
         return self.__local
 
     def setLocal(self, local: Location):
@@ -40,7 +41,35 @@ class Node:
     def setTag(self, tag: str):
         self.__tag = tag
 
+    def addTo(self, key: int, w: float):
+        self.__forw[key] = w
 
+    def addFrom(self, key: int, w: float):
+        self.__back[key] = w
+
+    def getW(self, dest: int) -> float:
+        return self.__forw.get(dest)
+
+    def getForw(self) -> dict:
+        return self.__forw.copy()
+
+    def getBack(self) -> dict:
+        return self.__back.copy()
+
+    def getKey(self) -> int:
+        return self.__key
+
+    def removeForw(self, key: int) -> bool:
+        if self.__forw.get(key) != None:
+            self.__forw.pop(key)
+            return True
+        return False
+
+    def removeBack(self, key: int) -> bool:
+        if self.__back.get(key) != None:
+            self.__back.pop(key)
+            return True
+        return False
 
 
 
