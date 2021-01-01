@@ -1,4 +1,5 @@
 from GraphInterface import GraphInterface
+from Edges import Edges
 from Node import Node
 
 # add Edges

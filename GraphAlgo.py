@@ -8,14 +8,17 @@ class GraphAlgo(GraphAlgoInterface):
 
     def __init__(self, grp: DiGraph):
         self.__grp = grp
+        self.__mc = grp.e_size()
 
     def get_graph(self) -> DiGraph:
         return self.__grp
 
     def load_from_json(self, file_name: str) -> bool:
         """
-        need to check
-        """
+        Loads a graph from a json file.
+        @param file_name: The path to the json file
+        @returns True if the loading was successful, False o.w.
+
         dict_graph = {}
         try:
             with open(file_name, "r") as file:
@@ -27,9 +30,10 @@ class GraphAlgo(GraphAlgoInterface):
         except IOError as e:
             print(e)
         self.__grp = dict_graph
+        """
 
     def save_to_json(self, file_name: str) -> bool:
-        with open (file_name, "w") as file:
+        with open(file_name, "w") as file:
             json.dump(self.__grp.__str__(), fp=file)
             return True
         return False
@@ -61,26 +65,22 @@ class GraphAlgo(GraphAlgoInterface):
         return q
 
     def connected_component(self, id1: int) -> list:
-        """
-        Finds the Strongly Connected Component(SCC) that node id1 is a part of.
-        @param id1: The node id
-        @return: The list of nodes in the SCC
-        """
-        raise NotImplementedError
+        q = []
+        if self.__grp.getNode(id1) != None:
+            for i in self.__grp.get_all_v():
+                if self.scc(id1, i):
+                    q.append(i)
+        return q
 
     def connected_components(self): # -> List[list]:
-        """
-        Finds all the Strongly Connected Component(SCC) in the graph.
-        @return: The list all SCC
-        """
         size = self.__grp.v_size()
         if size <= 1:
-            for i in self.__grp.get_all_v():
-                self.__grp.getNode(i).setTag(1)
             return
+        lis = []
         for i in self.__grp.get_all_v():
-            for j in self.__grp.get_all_v():
-                self.scc(i, j)
+            q = self.connected_component(i)
+            lis.append(q)
+        return lis
 
     def plot_graph(self) -> None:
         """
@@ -119,26 +119,12 @@ class GraphAlgo(GraphAlgoInterface):
         return map_dict
 
     def scc(self, id1: int, id2: int):
-        n1 = self.__grp.getNode(id1)
-        n2 = self.__grp.getNode(id2)
-        if n1.getTag() == 0:
-            GraphAlgo.num_compo += 1
-            n1.setTag(GraphAlgo.num_compo)
         if id1 == id2:
-            return True
-        if n1.getTag() != 0 and n2.getTag() != 0:
-            if n1.getTag() == n2.getTag():
-                return True
-            if n1.getTag != n2.getTag():
-                return False
+            return False
         if not self.bfs1(id1, id2):
             return False
         if not self.bfs1(id2, id1):
             return False
-        if n2.getTag() != 0:
-            n1.setTag(n2.getTag())
-
-            n2.setTag(n1.getTag())
         return True
 
     def bfs1(self, src: int, des: int):
@@ -155,16 +141,16 @@ class GraphAlgo(GraphAlgoInterface):
                 if j == des:
                     n.setWeight(1)
                     map_dict.append(n.getKey())
-                    self.clear(map_dict)
+                    self.__clear_weight(map_dict)
                     return True
                 elif n.getWeight() == 0:
                     n.setWeight(1)
                     qem.append(n.getKey())
                     map_dict.append(n.getKey())
-        self.clear(map_dict)
+        self.__clear_weight(map_dict)
         return False
 
-    def clear(self, map_dict: list):
+    def __clear_weight(self, map_dict: list):
         for i in map_dict:
             self.__grp.getNode(i).setWeight(0)
 
