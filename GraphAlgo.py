@@ -4,6 +4,7 @@ from Node import Node
 import json
 
 class GraphAlgo(GraphAlgoInterface):
+    num_compo = 0
 
     def __init__(self, grp: DiGraph):
         self.__grp = grp
@@ -12,6 +13,9 @@ class GraphAlgo(GraphAlgoInterface):
         return self.__grp
 
     def load_from_json(self, file_name: str) -> bool:
+        """
+        need to check
+        """
         dict_graph = {}
         try:
             with open(file_name, "r") as file:
@@ -25,11 +29,10 @@ class GraphAlgo(GraphAlgoInterface):
         self.__grp = dict_graph
 
     def save_to_json(self, file_name: str) -> bool:
-       try:
-           with open (file_name, "w") as file:
-               json.dump(self.__grp, default=lambda m: m.as_dict, fp=file, indent=4)
-       except IOError as e:
-           print(e)
+        with open (file_name, "w") as file:
+            json.dump(self.__grp.__str__(), fp=file)
+            return True
+        return False
 
     def shortest_path(self, id1: int, id2: int) -> (float, list):
         if self.__grp.getNode(id1) == None or self.__grp.getNode(id2) == None:
@@ -70,7 +73,14 @@ class GraphAlgo(GraphAlgoInterface):
         Finds all the Strongly Connected Component(SCC) in the graph.
         @return: The list all SCC
         """
-        raise NotImplementedError
+        size = self.__grp.v_size()
+        if size <= 1:
+            for i in self.__grp.get_all_v():
+                self.__grp.getNode(i).setTag(1)
+            return
+        for i in self.__grp.get_all_v():
+            for j in self.__grp.get_all_v():
+                self.scc(i, j)
 
     def plot_graph(self) -> None:
         """
@@ -107,3 +117,58 @@ class GraphAlgo(GraphAlgoInterface):
                     qem.append(n.getKey())
                     map_dict.append(n.getKey())
         return map_dict
+
+    def scc(self, id1: int, id2: int):
+        n1 = self.__grp.getNode(id1)
+        n2 = self.__grp.getNode(id2)
+        if n1.getTag() == 0:
+            GraphAlgo.num_compo += 1
+            n1.setTag(GraphAlgo.num_compo)
+        if id1 == id2:
+            return True
+        if n1.getTag() != 0 and n2.getTag() != 0:
+            if n1.getTag() == n2.getTag():
+                return True
+            if n1.getTag != n2.getTag():
+                return False
+        if not self.bfs1(id1, id2):
+            return False
+        if not self.bfs1(id2, id1):
+            return False
+        if n2.getTag() != 0:
+            n1.setTag(n2.getTag())
+
+            n2.setTag(n1.getTag())
+        return True
+
+    def bfs1(self, src: int, des: int):
+        map_dict = []
+        qem = []
+        self.__grp.getNode(src).setWeight(1)
+        map_dict.append(src)
+        qem.append(src)
+        for i in qem:
+            # b = False
+            poll = i
+            for j in self.__grp.all_out_edges_of_node(i):
+                n = self.__grp.getNode(j)
+                if j == des:
+                    n.setWeight(1)
+                    map_dict.append(n.getKey())
+                    self.clear(map_dict)
+                    return True
+                elif n.getWeight() == 0:
+                    n.setWeight(1)
+                    qem.append(n.getKey())
+                    map_dict.append(n.getKey())
+        self.clear(map_dict)
+        return False
+
+    def clear(self, map_dict: list):
+        for i in map_dict:
+            self.__grp.getNode(i).setWeight(0)
+
+
+
+
+

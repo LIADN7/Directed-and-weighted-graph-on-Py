@@ -1,16 +1,20 @@
 from GraphInterface import GraphInterface
 from Node import Node
 
+# add Edges
+# need to change to list instead of dictionary?
+
 class DiGraph(GraphInterface):
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.__nodes = {}
+        self.__edges = []
         self.__edgeSize = 0
         self.__nodeSize = 0
         self.__change = 0
 
     def __str__(self):
-        return f"{{nodes: [{self.__nodes}], edgeSize: {self.__edgeSize}, nodeSize: {self.__nodeSize}, change: {self.__change}}}"
+        return f"Nodes: [{self.__nodes}], Edges: {self.__edges}"
 
     def v_size(self) -> int:
         """

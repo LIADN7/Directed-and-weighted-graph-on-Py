@@ -39,10 +39,11 @@ grp.add_edge(2, 1, 1.2)
 grp.add_edge(2, 3, 11.2)
 grp.add_edge(1, 3, 1.1)
 grp.add_edge(3, 4, 1.1)
-print(grp.getNode(1))
 
-with open("node_file.txt", "w") as file:
-    json.dump(grp.getNode(1).__str__(), fp=file)
+algo = GraphAlgo(grp)
+# algo.save_to_json("algo.txt")
 
-with open("graph_file.txt", "w") as file:
-    json.dump(grp.__str__(), fp=file)
+# algo.load_from_json("algo.txt")
+
+j_dict = []
+

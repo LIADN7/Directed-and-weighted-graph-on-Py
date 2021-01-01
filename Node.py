@@ -4,7 +4,7 @@ from Location import Location
 class Node:
     defKey = 0
 
-    def __init__(self, Key: int,  local= Location(0.0, 0.0, 0.0), tag=0, nw=0.0, info=""):
+    def __init__(self, Key: int,  local= Location(0.0, 0.0, 0.0), tag=0, nw=0.0, info="", **kwargs):
         self.__key = Key
         self.__local = local
         self.__tag = tag
@@ -14,15 +14,12 @@ class Node:
         self.__back = dict()
         self.__prev = -1
 
-    def __str__(self):
-        return f"{{key: {self.__key}, local: {self.__local}, tag: {self.__tag}, weight: {self.__nw}, info: {self.__info}" \
-               f"forw: {self.__forw}, back: {self.__back}}}"
+    def __str__(self) -> str:
+        return f"id: {self.__key}, pos: {self.__local}"
 
-    def __repr__(self):
-        return f"key: {self.__key}, local: {self.__local}, tag: {self.__tag}, weight: {self.__nw}, info: {self.__info}" \
-               f"forw: {self.__forw}, back: {self.__back}"
+    def __repr__(self) -> str:
+        return f"{{id: {self.__key}, pos: {self.__local}}}"
 
-# ("{" + str(self.__key) +','+ str(self.__local) + ','+ str(self.__tag)+','+str(self.__nw)+','+self.__info+'}')
     def getKey(self) -> int:
         return self.__key
 
