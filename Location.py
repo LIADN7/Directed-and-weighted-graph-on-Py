@@ -23,5 +23,5 @@ class Location:
         return dis
 
     def __str__(self):
-        return "(" + str(self.__x) + ", " + str(self.__y) + ", " + str(self.__z) + ")"
+        return f"{{\"x\": {self.__x}, \"y\": {self.__y}, \"z\": {self.__z}}}"
 

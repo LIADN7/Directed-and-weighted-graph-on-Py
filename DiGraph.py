@@ -1,6 +1,7 @@
 from GraphInterface import GraphInterface
 from Edges import Edges
 from Node import Node
+import json
 
 # add Edges
 # need to change to list instead of dictionary?
@@ -9,13 +10,22 @@ class DiGraph(GraphInterface):
 
     def __init__(self, **kwargs):
         self.__nodes = {}
-        self.__edges = []
         self.__edgeSize = 0
         self.__nodeSize = 0
         self.__change = 0
 
     def __str__(self):
-        return f"Nodes: [{self.__nodes}], Edges: {self.__edges}"
+        e = []
+        n = []
+        for i in self.__nodes:
+            n.append(self.__nodes.get(i))
+            for j in self.__nodes.get(i).getForw():
+                edge = Edges(i, j, self.__nodes.get(i).getW(j))
+                e.append(edge)
+        return f"{{\"Nodes\": {n}, \"Edges\": {e}}}"
+
+    def __iter__(self):
+        return self.__nodes.values().__iter__()
 
     def v_size(self) -> int:
         """
@@ -71,15 +81,17 @@ class DiGraph(GraphInterface):
         @return: True if the edge was added successfully, False o.w.
         Note: If the edge already exists or one of the nodes dose not exists the functions will do nothing
         """
-        if self.getNode(id1) == None or self.getNode(id2) == None or id1 == id2:
-            return False
-        t1 = self.getNode(id1)
-        t2 = self.getNode(id2)
-        t1.addTo(id2, weight)
-        t2.addFrom(id1, weight)
-        self.__edgeSize += 1
-        self.__change += 1
-        return True
+        if id1 != id2 and weight >= 0:
+            if self.getNode(id1) == None or self.getNode(id2) == None or id1 == id2:
+                return False
+            t1 = self.getNode(id1)
+            t2 = self.getNode(id2)
+            t1.addTo(id2, weight)
+            t2.addFrom(id1, weight)
+            self.__edgeSize += 1
+            self.__change += 1
+            return True
+        return False
 
     def add_node(self, node_id: int, pos: tuple = None) -> bool:
         """
@@ -90,7 +102,7 @@ class DiGraph(GraphInterface):
         Note: if the node id already exists the node will not be added
         """
         if self.__nodes.get(node_id) == None:
-            self.__nodes[node_id] = Node(node_id)
+            self.__nodes[node_id] = Node(node_id, pos)
             self.__nodeSize += 1
             self.__change += 1
             return True

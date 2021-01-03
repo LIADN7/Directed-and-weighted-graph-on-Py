@@ -1,40 +1,44 @@
 from GraphAlgoInterface import GraphAlgoInterface
 from DiGraph import DiGraph
+from Edges import Edges
 from Node import Node
 import json
 
 class GraphAlgo(GraphAlgoInterface):
-    num_compo = 0
 
     def __init__(self, grp: DiGraph):
         self.__grp = grp
-        self.__mc = grp.e_size()
 
     def get_graph(self) -> DiGraph:
         return self.__grp
 
     def load_from_json(self, file_name: str) -> bool:
-        """
-        Loads a graph from a json file.
-        @param file_name: The path to the json file
-        @returns True if the loading was successful, False o.w.
-
-        dict_graph = {}
+        graph = DiGraph()
+        dict_graph = []
         try:
             with open(file_name, "r") as file:
-                dict_graph = json.load(fp=file)
-                for k, v in dict_graph.item():
-                    g = DiGraph(**v)
-                    # add to init of DiGraph - **kwargs
-                    dict_graph[k] = g
+                dict_graph = json.load(file)
+                for i in dict_graph['Nodes']:
+                    # add the pos
+                    graph.add_node(i["id"])
+                for i in dict_graph["Edges"]:
+                    graph.add_edge(i["src"], i["dest"], i["w"])
         except IOError as e:
             print(e)
-        self.__grp = dict_graph
-        """
+        self.__grp = graph
 
     def save_to_json(self, file_name: str) -> bool:
+        e = []
+        n = []
+        for i in self.__grp:
+            no = {"id": i.getKey()}
+            n.append(no)
+            for j in i.getForw():
+                edge = {"src": i.getKey(), "dest": j, "w": i.getW(j)}
+                e.append(edge)
+        dict_t = {"Nodes": n, "Edges": e}
         with open(file_name, "w") as file:
-            json.dump(self.__grp.__str__(), fp=file)
+            json.dump(dict_t, default=lambda m: m.__dict__,fp=file)
             return True
         return False
 
@@ -100,7 +104,6 @@ class GraphAlgo(GraphAlgoInterface):
         way = -1
         for i in qem:
             b = False
-            poll = i
             weight = self.__grp.getNode(i).getWeight()
             for j in self.__grp.all_out_edges_of_node(i):
                 count = self.__grp.getNode(i).getW(j) + weight
@@ -134,8 +137,6 @@ class GraphAlgo(GraphAlgoInterface):
         map_dict.append(src)
         qem.append(src)
         for i in qem:
-            # b = False
-            poll = i
             for j in self.__grp.all_out_edges_of_node(i):
                 n = self.__grp.getNode(j)
                 if j == des:

@@ -57,11 +57,3 @@ grp.add_edge(4, 6, 1)
 grp.add_edge(8, 4, 1)
 grp.add_edge(7, 8, 1)
 algo = GraphAlgo(grp)
-
-print(algo.shortest_path(6, 2))
-print(algo.connected_components())
-
-grp.add_edge(0, 1, 1)
-grp.add_edge(1, 2, 4)
-print(algo.shortest_path(0,1))
-print(algo.shortest_path(0,2))
