@@ -14,7 +14,7 @@ class GraphAlgo(GraphAlgoInterface):
 
     def load_from_json(self, file_name: str) -> bool:
         graph = DiGraph()
-        dict_graph = []
+        dict_graph = list()
         try:
             with open(file_name, "r") as file:
                 dict_graph = json.load(file)
@@ -28,8 +28,8 @@ class GraphAlgo(GraphAlgoInterface):
         self.__grp = graph
 
     def save_to_json(self, file_name: str) -> bool:
-        e = []
-        n = []
+        e = list()
+        n = list()
         for i in self.__grp:
             no = {"id": i.getKey()}
             n.append(no)
@@ -45,7 +45,7 @@ class GraphAlgo(GraphAlgoInterface):
     def shortest_path(self, id1: int, id2: int) -> (float, list):
         if self.__grp.getNode(id1) == None or self.__grp.getNode(id2) == None:
             return None
-        q = []
+        q = list()
         if id1 == id2:
             return (0, [id1])
         temp_dict = self.bfs(id1, id2)
@@ -69,7 +69,7 @@ class GraphAlgo(GraphAlgoInterface):
         return q
 
     def connected_component(self, id1: int) -> list:
-        q = []
+        q = list()
         if self.__grp.getNode(id1) != None:
             for i in self.__grp.get_all_v():
                 if self.scc(id1, i):
@@ -80,7 +80,7 @@ class GraphAlgo(GraphAlgoInterface):
         size = self.__grp.v_size()
         if size <= 1:
             return
-        lis = []
+        lis = list()
         for i in self.__grp.get_all_v():
             q = self.connected_component(i)
             lis.append(q)
@@ -96,8 +96,8 @@ class GraphAlgo(GraphAlgoInterface):
         raise NotImplementedError
 
     def bfs(self, src: int, des: int):
-        map_dict = []
-        qem = []
+        map_dict = list()
+        qem = list()
         self.__grp.getNode(src).setWeight(1)
         map_dict.append(src)
         qem.append(src)
@@ -131,8 +131,8 @@ class GraphAlgo(GraphAlgoInterface):
         return True
 
     def bfs1(self, src: int, des: int):
-        map_dict = []
-        qem = []
+        map_dict = list()
+        qem = list()
         self.__grp.getNode(src).setWeight(1)
         map_dict.append(src)
         qem.append(src)

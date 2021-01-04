@@ -3,20 +3,21 @@ from Edges import Edges
 from Node import Node
 import json
 
+
 # add Edges
 # need to change to list instead of dictionary?
 
 class DiGraph(GraphInterface):
 
     def __init__(self, **kwargs):
-        self.__nodes = {}
+        self.__nodes = dict()
         self.__edgeSize = 0
         self.__nodeSize = 0
         self.__change = 0
 
     def __str__(self):
-        e = []
-        n = []
+        e = list()
+        n = list()
         for i in self.__nodes:
             n.append(self.__nodes.get(i))
             for j in self.__nodes.get(i).getForw():
@@ -81,17 +82,15 @@ class DiGraph(GraphInterface):
         @return: True if the edge was added successfully, False o.w.
         Note: If the edge already exists or one of the nodes dose not exists the functions will do nothing
         """
-        if id1 != id2 and weight >= 0:
-            if self.getNode(id1) == None or self.getNode(id2) == None or id1 == id2:
-                return False
-            t1 = self.getNode(id1)
-            t2 = self.getNode(id2)
-            t1.addTo(id2, weight)
-            t2.addFrom(id1, weight)
-            self.__edgeSize += 1
-            self.__change += 1
-            return True
-        return False
+        if self.getNode(id1) == None or self.getNode(id2) == None or id1 == id2 or weight < 0:
+            return False
+        t1 = self.getNode(id1)
+        t2 = self.getNode(id2)
+        t1.addTo(id2, weight)
+        t2.addFrom(id1, weight)
+        self.__edgeSize += 1
+        self.__change += 1
+        return True
 
     def add_node(self, node_id: int, pos: tuple = None) -> bool:
         """
@@ -139,7 +138,7 @@ class DiGraph(GraphInterface):
         if self.getNode(node_id1) == None or self.getNode(node_id2) == None or node_id1 == node_id2:
             return False
         temp = self.all_out_edges_of_node(node_id1)
-        if temp.get(node_id2)  != None:
+        if temp.get(node_id2) != None:
             t1 = self.getNode(node_id1)
             t2 = self.getNode(node_id2)
             t1.removeForw(node_id2)
@@ -154,4 +153,3 @@ class DiGraph(GraphInterface):
         return a Node
         """
         return self.__nodes.get(id1)
-
