@@ -8,7 +8,7 @@ import numpy as np
 
 class GraphAlgo(GraphAlgoInterface):
 
-    def __init__(self, grp: DiGraph):
+    def __init__(self, grp = DiGraph):
         self.__grp = grp
 
     def get_graph(self) -> DiGraph:
@@ -21,13 +21,20 @@ class GraphAlgo(GraphAlgoInterface):
             with open(file_name, "r") as file:
                 dict_graph = json.load(file)
                 for i in dict_graph['Nodes']:
-                    # add the pos
-                    graph.add_node(i["id"])
+                    if i.__contains__("pos"):
+                        s = i["pos"].split(",")
+                        x = float(s[0])
+                        y = float(s[1])
+                        graph.add_node(i["id"], (x, y))
+                    else:
+                        graph.add_node(i["id"])
                 for i in dict_graph["Edges"]:
                     graph.add_edge(i["src"], i["dest"], i["w"])
         except IOError as e:
             print(e)
+            return False
         self.__grp = graph
+        return True
 
     def save_to_json(self, file_name: str) -> bool:
         e = list()
@@ -98,8 +105,6 @@ class GraphAlgo(GraphAlgoInterface):
                 v = self.__grp.getNode(j).getLocal()
                 x = v[0]
                 y = v[1]
-                print(x, " , ", y)
-                print(loc[i][0], " , ", loc[i][1])
                 if i>j:
                     plt.plot((loc[i][0], x), (loc[i][1], y), color="red")
                 else:

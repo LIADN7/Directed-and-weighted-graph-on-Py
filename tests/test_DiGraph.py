@@ -1,7 +1,8 @@
 from unittest import TestCase
 from DiGraph import DiGraph
 from Node import Node
-
+import time
+import datetime
 
 def create_graph():
     grp = DiGraph()
@@ -66,14 +67,12 @@ class TestDiGraph(TestCase):
         grp.add_edge(1, 3, 4)
         self.assertEqual(grp.e_size(), 8)
 
-
     def test_get_all_v(self):
         grp = create_graph()
         for i in grp.get_all_v():
             if i != 0 and i != 1 and i != 2 and i != 3 and i != 4 and i != 5 and i != 6 and i != 7 and i != 8 and i != 9:
                 self.fail("not need to be Exists")
-        self.assertEqual(len(grp.get_all_v()),10)
-
+        self.assertEqual(len(grp.get_all_v()), 10)
 
     def test_all_in_out_edges_of_node(self):
         """
@@ -198,3 +197,33 @@ class TestDiGraph(TestCase):
             self.assertEqual(grp.getNode(1).getWeight(), 0)
             self.assertEqual(grp.getNode(1).getPrev(), -1)
         self.assertEqual(grp.getNode(10), None)
+
+    def test_graphMillion(self):
+        """
+        Build a graph with a million vertices
+        each vertex has 3 edges
+        """
+        st = time.time()
+        g = DiGraph()
+        for i in range(1000):
+            g.add_node(i)
+        for i in range(1000):
+            for j in range(3):
+                g.add_edge(i, i + j, 1)
+        print("Graph construction 10,000 nodes run time: ", round(time.time() - st, 3) , " sec")
+        for i in range(10000, 100000):
+            g.add_node(i)
+        for i in range(10000,100000):
+            for j in range(3):
+                g.add_edge(i, i + j, 1)
+        print("Graph construction 100,000 nodes run time: ", round(time.time() - st, 3) , " sec")
+        for i in range(100000,1000000):
+            g.add_node(i)
+        for i in range(100000,1000000):
+            for j in range(3):
+                g.add_edge(i, i + j, 1)
+        print("Graph construction 1,000,000 nodes run time: ", round(time.time() - st, 3) , " sec")
+
+
+
+        return Node
