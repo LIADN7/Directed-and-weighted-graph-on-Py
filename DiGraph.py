@@ -102,8 +102,8 @@ class DiGraph(GraphInterface):
         """
         if self.__nodes.get(node_id) == None:
             self.__nodeSize += 1
-            x = self.__nodeSize*random.random()*2.0
-            y = self.__nodeSize*random.random()*2.0
+            x = random.random()*0.007
+            y = random.random()*0.007
             if pos == None:
                 self.__nodes[node_id] = Node(node_id, (x, y))
             else:

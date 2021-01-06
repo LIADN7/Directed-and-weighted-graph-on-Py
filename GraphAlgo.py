@@ -108,7 +108,7 @@ class GraphAlgo(GraphAlgoInterface):
                 if i>j:
                     plt.plot((loc[i][0], x), (loc[i][1], y), color="red")
                 else:
-                    plt.plot((loc[i][0]-0.05, x-0.05), (loc[i][1]-0.05, y-0.05), color="green")
+                    plt.plot((loc[i][0]-0.00005, x-0.00005), (loc[i][1]-0.00005, y-0.00005), color="green")
 
         plt.show()
 

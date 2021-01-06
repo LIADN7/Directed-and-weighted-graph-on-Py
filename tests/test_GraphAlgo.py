@@ -65,3 +65,11 @@ class TestGraphAlgo(TestCase):
         if temp == None:
             self.fail(temp, " == None")
 
+    def test_connected_components(self):
+        g = doSmallGraph()
+        g.add_edge(2, 1, 4)
+        g.add_edge(1, 2, 4)
+
+        grp = GraphAlgo(g)
+        grp.plot_graph()
+
