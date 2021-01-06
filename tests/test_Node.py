@@ -8,6 +8,7 @@ this class is a type of unittest and tests all the function in Node class
 """
 node = Node(1)
 
+
 class TestNode(TestCase):
 
     def test_getKey(self):

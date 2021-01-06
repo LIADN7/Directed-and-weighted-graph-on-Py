@@ -1,90 +1,83 @@
-""""
-this class is a type of unittest and tests all the function in Node class
-@atuor liadn7
-@athour avielc11
-"""
-node = Node(1)
 
-class TestNode(TestCase):
 
-    def test_getKey(self):
-        """
-        check if the key of the new node that created is as given at the constructor
-        """
-        self.assertEqual(node.getKey(), 1)
 
-    def test_getLocal(self):
-        """
-        check if the location of the node is change to (5, 4.2)
-        """
-        node.setLocal((5, 4.2))
-        self.assertEqual(node.getLocal(), (5, 4.2))
+class Node:
+    defKey = 0
 
-    def test_getWeight(self):
-        """
-        check if the weight of the node is change to (5.1)
-        """
-        node.setWeight(5.1)
-        self.assertEqual(node.getWeight(), 5.1)
+    def __init__(self, Key: int,  local=(0.0, 0.0), tag=0, nw=0.0, info="", **kwargs):
+        self.__key = Key
+        self.__local = local
+        self.__tag = tag
+        self.__nw = nw
+        self.__info = info
+        self.__forw = dict()
+        self.__back = dict()
+        self.__prev = -1
 
-    def test_getInfo(self):
-        """
-        check if the information (type - str) of the node is change to ("good")
-        """
-        node.setInfo("good")
-        self.assertEqual(node.getInfo(), "good")
+    def __str__(self) -> str:
+        return f"\"id\": {self.__key}, \"pos\": {self.__local}"
 
-    def test_getTag(self):
-        """
-        check if the tag of the node is change to (4)
-        """
-        node.setTag(4)
-        self.assertEqual(node.getTag(), 4)
+    def __repr__(self) -> str:
+        return f"{{\"id\": {self.__key}, \"pos\": {self.__local}}}"
 
-    def test_getPrev(self):
-        """
-        check if the prev of the node is change to (7)
-        """
-        node.setPrev(7)
-        self.assertEqual(node.getPrev(), 7)
+    def getKey(self) -> int:
+        return self.__key
 
-    def test_addTo_getW_getForw(self):
-        """
-        check if successfully connect node to the another node by give only positive weight (>=0)
-        """
-        node.addTo(2, 0.23)
-        node.addTo(7, 1.3)
+    def getLocal(self) -> tuple:
+        return self.__local
 
-        self.assertEqual(node.getW(2), 0.23)
-        self.assertEqual(node.getW(7), 1.3)
-        for i in node.getForw():
-            if i != 2 and i != 7:
-                self.assertEqual(i, 2)
+    def setLocal(self, local: tuple):
+        self.__local = local
 
-    def test_addFrom_getBack(self):
-        """
-        check if successfully connect another node to the current node by give only positive weight (>=0)
-        """
-        node = Node(1)
-        node.addFrom(5, 2)
-        node.addFrom(4, 9)
-        node.addTo(13, 2.2)
-        for i in node.getBack():
-            if i != 5 and i != 4:
-                self.fail("not good")
+    def getWeight(self) -> float:
+        return self.__nw
 
-    def test_removeForw_removeBack(self):
-        """
-        check if successfully disconnect between two nodes
-        """
-        node.addTo(2, 0.23)
-        node.addTo(7, 1.3)
-        node.addTo(8, 1.3)
-        node.removeForw(8)
-        node.addFrom(5, 2)
-        node.addFrom(4, 9)
-        node.removeBack(12)
-        for i in node.getForw():
-            self.assertNotEqual(i, 8)
-        for i in node.getBack():
-            self.assertNotEqual(i, 12)
+    def setWeight(self, nw: float):
+        self.__nw = nw
+
+    def getInfo(self) -> str:
+        return self.__info
+
+    def setInfo(self, info: str):
+        self.__info = info
+
+    def getTag(self) -> int:
+        return self.__tag
+
+    def setTag(self, tag: str):
+        self.__tag = tag
+
+    def addTo(self, key: int, w: float):
+        self.__forw[key] = w
+
+    def addFrom(self, key: int, w: float):
+        self.__back[key] = w
+
+    def getW(self, dest: int) -> float:
+        return self.__forw.get(dest)
+
+    def getForw(self) -> dict:
+        return self.__forw.copy()
+
+    def getBack(self) -> dict:
+        return self.__back.copy()
+
+    def removeForw(self, key: int) -> bool:
+        if self.__forw.get(key) != None:
+            self.__forw.pop(key)
+            return True
+        return False
+
+    def removeBack(self, key: int) -> bool:
+        if self.__back.get(key) != None:
+            self.__back.pop(key)
+            return True
+        return False
+
+    def getPrev(self):
+        return self.__prev
+
+    def setPrev(self, prev: int):
+        self.__prev = prev
+
+
