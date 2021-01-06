@@ -1,11 +1,8 @@
 from GraphInterface import GraphInterface
 from Edges import Edges
 from Node import Node
+import random
 import json
-
-
-# add Edges
-# need to change to list instead of dictionary?
 
 class DiGraph(GraphInterface):
 
@@ -43,14 +40,15 @@ class DiGraph(GraphInterface):
         return self.__edgeSize
 
     def get_all_v(self) -> dict:
-        """return a dictionary of all the nodes in the Graph, each node is represented using a pair  (key, node_data)
         """
-        return self.__nodes
+        return a dictionary of all the nodes in the Graph, each node is represented using a pair  (key, node_data)
+        """
+        return self.__nodes.copy()
 
     def all_in_edges_of_node(self, id1: int) -> dict:
         """return a dictionary of all the nodes connected to (into) node_id ,
         each node is represented using a pair (key, weight)
-         """
+        """
         temp = self.getNode(id1)
         if temp != None:
             return temp.getBack()
@@ -86,6 +84,8 @@ class DiGraph(GraphInterface):
             return False
         t1 = self.getNode(id1)
         t2 = self.getNode(id2)
+        if t1.getW(id2) != None:
+            return False
         t1.addTo(id2, weight)
         t2.addFrom(id1, weight)
         self.__edgeSize += 1
@@ -101,8 +101,13 @@ class DiGraph(GraphInterface):
         Note: if the node id already exists the node will not be added
         """
         if self.__nodes.get(node_id) == None:
-            self.__nodes[node_id] = Node(node_id, pos)
             self.__nodeSize += 1
+            x = self.__nodeSize*random.random()*2.0
+            y = self.__nodeSize*random.random()*2.0
+            if pos == None:
+                self.__nodes[node_id] = Node(node_id, (x, y))
+            else:
+                self.__nodes[node_id] = Node(node_id, pos)
             self.__change += 1
             return True
         return False
@@ -142,7 +147,7 @@ class DiGraph(GraphInterface):
             t1 = self.getNode(node_id1)
             t2 = self.getNode(node_id2)
             t1.removeForw(node_id2)
-            t2.removeForw(node_id1)
+            t2.removeBack(node_id1)
             self.__edgeSize -= 1
             self.__change += 1
             return True
@@ -153,3 +158,12 @@ class DiGraph(GraphInterface):
         return a Node
         """
         return self.__nodes.get(id1)
+
+    def getAllLocation(self):
+        dic = dict()
+        j = 0
+        for i in self.__nodes:
+            temp = self.getNode(i).getLocal()
+            dic[j] = temp
+            j += 1
+        return dic

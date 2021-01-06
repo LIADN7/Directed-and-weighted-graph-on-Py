@@ -1,10 +1,10 @@
-from Location import Location
+
 
 
 class Node:
     defKey = 0
 
-    def __init__(self, Key: int,  local=Location(0.0, 0.0, 0.0), tag=0, nw=0.0, info="", **kwargs):
+    def __init__(self, Key: int,  local=(0.0, 0.0), tag=0, nw=0.0, info="", **kwargs):
         self.__key = Key
         self.__local = local
         self.__tag = tag
@@ -23,10 +23,10 @@ class Node:
     def getKey(self) -> int:
         return self.__key
 
-    def getLocal(self) -> Location:
+    def getLocal(self) -> tuple:
         return self.__local
 
-    def setLocal(self, local: Location):
+    def setLocal(self, local: tuple):
         self.__local = local
 
     def getWeight(self) -> float:
@@ -61,9 +61,6 @@ class Node:
 
     def getBack(self) -> dict:
         return self.__back.copy()
-
-    def getKey(self) -> int:
-        return self.__key
 
     def removeForw(self, key: int) -> bool:
         if self.__forw.get(key) != None:

@@ -1,7 +1,6 @@
 from GraphAlgo import GraphAlgo
 from DiGraph import DiGraph
 from Edges import Edges
-from Location import Location
 from Node import Node
 import json
 """
@@ -47,8 +46,8 @@ grp.add_edge(8, 9, 1)
 grp.add_edge(1, 2, 1)
 grp.add_edge(2, 6, 2)
 grp.add_edge(6, 1, 1)
-grp.add_edge(3, 2, 1)
-grp.add_edge(3, 7, 1)
+grp.add_edge(3, 2, 8)
+grp.add_edge(3, 7, 6)
 grp.add_edge(3, 5, 1)
 grp.add_edge(7, 3, 1)
 grp.add_edge(5, 4, 1)
@@ -56,4 +55,9 @@ grp.add_edge(4, 5, 1)
 grp.add_edge(4, 6, 1)
 grp.add_edge(8, 4, 1)
 grp.add_edge(7, 8, 1)
+
 algo = GraphAlgo(grp)
+algo.plot_graph()
+
+
+

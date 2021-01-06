@@ -3,6 +3,8 @@ from DiGraph import DiGraph
 from Edges import Edges
 from Node import Node
 import json
+import matplotlib.pyplot as plt
+import numpy as np
 
 class GraphAlgo(GraphAlgoInterface):
 
@@ -87,13 +89,23 @@ class GraphAlgo(GraphAlgoInterface):
         return lis
 
     def plot_graph(self) -> None:
-        """
-        Plots the graph.
-        If the nodes have a position, the nodes will be placed there.
-        Otherwise, they will be placed in a random but elegant manner.
-        @return: None
-        """
-        raise NotImplementedError
+        loc = self.__grp.getAllLocation()
+        for i in loc:
+            plt.scatter(loc[i][0], loc[i][1], color="m")
+            plt.text(loc[i][0], loc[i][1], i)
+            edges = self.__grp.all_out_edges_of_node(i)
+            for j in edges:
+                v = self.__grp.getNode(j).getLocal()
+                x = v[0]
+                y = v[1]
+                print(x, " , ", y)
+                print(loc[i][0], " , ", loc[i][1])
+                if i>j:
+                    plt.plot((loc[i][0], x), (loc[i][1], y), color="red")
+                else:
+                    plt.plot((loc[i][0]-0.05, x-0.05), (loc[i][1]-0.05, y-0.05), color="green")
+
+        plt.show()
 
     def bfs(self, src: int, des: int):
         map_dict = list()
@@ -154,8 +166,3 @@ class GraphAlgo(GraphAlgoInterface):
     def __clear_weight(self, map_dict: list):
         for i in map_dict:
             self.__grp.getNode(i).setWeight(0)
-
-
-
-
-
