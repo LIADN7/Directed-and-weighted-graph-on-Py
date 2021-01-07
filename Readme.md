@@ -54,7 +54,7 @@ the GraphAlgo has:
 *   shortest_path(self, id1: int, id2: int) -> (float, list): finds the shortest path between node(id1) to node(id2).
 *   connected_component(self, id1: int) -> list: finds the Strongly Connected Component(SCC) that node id1 is a part of.
 *   connected_components(self) -> List[list]:  finds all the Strongly Connected Component(SCC) in the graph.
-*   plot_graph(self) -> None: draw the graph on frame.
+*   plot_graph(self) -> None: draw the graph on Plot so the edge in the high NodeKey to the low is red else the edge is green..
 use at ather algorithms:
 *   the function shortest_path use at bfs algorithm.
 *   the function connected_component use at scc algorithm. 
