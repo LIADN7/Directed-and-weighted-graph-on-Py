@@ -2,9 +2,6 @@
 
 ***
 
-**[@authors liadn7](https://github.com/liadn7)**
-
-**[@authors avielc11](https://github.com/avielc11)**
 
 the class Nodes presents the information of a node_data type
 and present all the ribs that go to and go from the mode on the graph.
@@ -79,3 +76,7 @@ the function get two numbers - id1, id2. and check:
 
 
 
+
+**[@authors liadn7](https://github.com/liadn7)**
+
+**[@authors avielc11](https://github.com/avielc11)**
