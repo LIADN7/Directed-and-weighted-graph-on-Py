@@ -5,6 +5,9 @@ import random
 import json
 
 class DiGraph(GraphInterface):
+    """
+    this class presents a directed and weighted graph
+    """
 
     def __init__(self, **kwargs):
         self.__nodes = dict()
