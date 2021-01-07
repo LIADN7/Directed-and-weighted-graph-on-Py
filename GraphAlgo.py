@@ -128,7 +128,6 @@ class GraphAlgo(GraphAlgoInterface):
         Finds all the Strongly Connected Component(SCC) in the graph.
         @return: The list all SCC
         """
-
         size = self.__grp.v_size()
         if size <= 1:
             return
