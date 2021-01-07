@@ -1,7 +1,8 @@
 **Directed and weighted graph at python.**
 
 ***
-**@authors liadn7 avielc11**
+**[@authors liadn7](https://github.com/liadn7)**
+**[@authors avielc11](https://github.com/avielc11)**
 
 the class Nodes presents the information of a node_data type
 and present all the ribs that go to and go from the mode on the graph.
