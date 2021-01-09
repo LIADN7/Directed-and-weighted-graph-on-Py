@@ -42,8 +42,8 @@ def build_G_1000_8000_0():
     if flag:
         print("successfully construction from \"G_1000_8000_0.json\" run time: ", round(time.time() - st, 3), " sec")
         st = time.time()
-        algo.shortest_path(400, 9050)
-        print("shortest_path 400 -->> 9050 run time: ", round(time.time() - st, 3), " sec")
+        algo.shortest_path(400, 700)
+        print("shortest_path 400 -->> 700 run time: ", round(time.time() - st, 3), " sec")
         st = time.time()
         algo.connected_component(0)
         print("connected_component - node 0 run time: ", round(time.time() - st, 3), " sec")
@@ -92,12 +92,14 @@ def build_G_30000_240000_0():
         st = time.time()
         algo.shortest_path(0, 4)
         print("shortest_path 0 -->> 4 run time: ", round(time.time() - st, 3), " sec")
+        """
         st = time.time()
         algo.connected_component(0)
         print("connected_component - node 0 run time: ", round(time.time() - st, 3), " sec")
         st = time.time()
         algo.connected_components()
         print("connected_components run time: ", round(time.time() - st, 3), " sec")
+        """
 
 if __name__ == '__main__':
     build_G_10_80_0()

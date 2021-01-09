@@ -86,10 +86,10 @@ class GraphAlgo(GraphAlgoInterface):
         https://en.wikipedia.org/wiki/Dijkstra's_algorithm
         """
         if self.__grp.getNode(id1) == None or self.__grp.getNode(id2) == None:
-            return None
+            return 0, []
         q = list()
         if id1 == id2:
-            return (0, [id1])
+            return 0, [id1]
         temp_dict = self.bfs(id1, id2)
         if self.__grp.getNode(id2).getPrev() != -1:
             s = self.__grp.getNode(id2).getWeight()
@@ -108,7 +108,7 @@ class GraphAlgo(GraphAlgoInterface):
             t = self.__grp.getNode(i)
             t.setWeight(0)
             t.setPrev(-1)
-        return q
+        return 0, []
 
     def connected_component(self, id1: int) -> list:
         """
