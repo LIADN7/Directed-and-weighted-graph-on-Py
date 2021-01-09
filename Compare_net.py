@@ -69,10 +69,10 @@ def load_json(file_name: str):
         return graph
 
 if __name__ == '__main__':
-    build_G_10_80_0()
-    build_G_100_800_0()
-    build_G_1000_8000_0()
-    build_G_10000_80000_0()
-    build_G_20000_160000_0()
-    build_G_30000_240000_0()
+    build_10_80_0()
+    build_100_800_0()
+    build_1000_8000_0()
+    build_10000_80000_0()
+    build_20000_160000_0()
+    build_30000_240000_0()
     print("done")
