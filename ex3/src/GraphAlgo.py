@@ -1,7 +1,7 @@
-from GraphAlgoInterface import GraphAlgoInterface
-from DiGraph import DiGraph
-from Edges import Edges
-from Node import Node
+from ex3.src.GraphAlgoInterface import GraphAlgoInterface
+from ex3.src.DiGraph import DiGraph
+from ex3.src.Edges import Edges
+from ex3.src.Node import Node
 import json
 import matplotlib.pyplot as plt
 import numpy as np

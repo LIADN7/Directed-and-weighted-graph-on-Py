@@ -1,7 +1,6 @@
 from unittest import TestCase
-from DiGraph import DiGraph
-from GraphAlgo import GraphAlgo
-
+from ex3.src.DiGraph import DiGraph
+from ex3.src.GraphAlgo import GraphAlgo
 import random
 
 

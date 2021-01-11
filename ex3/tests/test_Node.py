@@ -1,5 +1,5 @@
 from unittest import TestCase
-from Node import Node
+from ex3.src.Node import Node
 
 """"
 this class is a type of unittest and tests all the function in Node class

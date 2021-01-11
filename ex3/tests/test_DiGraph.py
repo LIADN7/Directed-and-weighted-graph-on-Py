@@ -1,6 +1,6 @@
 from unittest import TestCase
-from DiGraph import DiGraph
-from Node import Node
+from ex3.src.DiGraph import DiGraph
+from ex3.src.Node import Node
 import time
 import datetime
 

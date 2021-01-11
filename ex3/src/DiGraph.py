@@ -1,6 +1,6 @@
-from GraphInterface import GraphInterface
-from Edges import Edges
-from Node import Node
+from ex3.src.GraphInterface import GraphInterface
+from ex3.src.Edges import Edges
+from ex3.src.Node import Node
 import random
 import json
 

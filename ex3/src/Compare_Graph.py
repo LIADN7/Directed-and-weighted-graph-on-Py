@@ -1,5 +1,5 @@
 from DiGraph import DiGraph
-from GraphAlgo import GraphAlgo
+from ex3.src.GraphAlgo import GraphAlgo
 import time
 import datetime
 
