@@ -6,7 +6,7 @@ import datetime
 def build_G_10_80_0():
     algo = GraphAlgo()
     st = time.time()
-    flag = algo.load_from_json("./data/G_10_80_0.json")
+    flag = algo.load_from_json("../data/G_10_80_0.json")
     if flag:
         print("successfully construction from \"G_10_80_0.json\" run time: ", round(time.time() - st, 3), " sec")
         st = time.time()
@@ -22,7 +22,7 @@ def build_G_10_80_0():
 def build_G_100_800_0():
     algo = GraphAlgo()
     st = time.time()
-    flag = algo.load_from_json("./data/G_100_800_0.json")
+    flag = algo.load_from_json("../data/G_100_800_0.json")
     if flag:
         print("successfully construction from \"G_100_800_0.json\" run time: ", round(time.time() - st, 3), " sec")
         st = time.time()
@@ -38,7 +38,7 @@ def build_G_100_800_0():
 def build_G_1000_8000_0():
     algo = GraphAlgo()
     st = time.time()
-    flag = algo.load_from_json("./data/G_1000_8000_0.json")
+    flag = algo.load_from_json("../data/G_1000_8000_0.json")
     if flag:
         print("successfully construction from \"G_1000_8000_0.json\" run time: ", round(time.time() - st, 3), " sec")
         st = time.time()
@@ -54,7 +54,7 @@ def build_G_1000_8000_0():
 def build_G_10000_80000_0():
     algo = GraphAlgo()
     st = time.time()
-    flag = algo.load_from_json("./data/G_10000_80000_0.json")
+    flag = algo.load_from_json("../data/G_10000_80000_0.json")
     if flag:
         print("successfully construction from \"G_10000_80000_0.json\" run time: ", round(time.time() - st, 3), " sec")
         st = time.time()
@@ -70,7 +70,7 @@ def build_G_10000_80000_0():
 def build_G_20000_160000_0():
     algo = GraphAlgo()
     st = time.time()
-    flag = algo.load_from_json("./data/G_20000_160000_0.json")
+    flag = algo.load_from_json("../data/G_20000_160000_0.json")
     if flag:
         print("successfully construction from \"G_20000_160000_0.json\" run time: ", round(time.time() - st, 3), " sec")
         st = time.time()
@@ -86,7 +86,7 @@ def build_G_20000_160000_0():
 def build_G_30000_240000_0():
     algo = GraphAlgo()
     st = time.time()
-    flag = algo.load_from_json("./data/G_30000_240000_0.json")
+    flag = algo.load_from_json("../data/G_30000_240000_0.json")
     if flag:
         print("successfully construction from \"G_30000_240000_0.json\" run time: ", round(time.time() - st, 3), " sec")
         st = time.time()

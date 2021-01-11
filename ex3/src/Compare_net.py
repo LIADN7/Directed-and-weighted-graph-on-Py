@@ -5,7 +5,7 @@ import datetime
 
 def build_10_80_0():
     st = time.time()
-    grp = load_json("./data/G_10_80_0.json")
+    grp = load_json("../data/G_10_80_0.json")
     print("successfully construction from \"G_10_80_0.json\" run time: ", round(time.time() - st, 3), " sec")
     st = time.time()
     nx.shortest_path(grp, 0, 4, weight='weight')
@@ -14,7 +14,7 @@ def build_10_80_0():
 
 def build_100_800_0():
     st = time.time()
-    grp = load_json("./data/G_100_800_0.json")
+    grp = load_json("../data/G_100_800_0.json")
     print("successfully construction from \"G_100_800_0.json\" run time: ", round(time.time() - st, 3), " sec")
     st = time.time()
     nx.shortest_path(grp, 48, 4, weight='weight')
@@ -23,7 +23,7 @@ def build_100_800_0():
 
 def build_1000_8000_0():
     st = time.time()
-    grp = load_json("./data/G_1000_8000_0.json")
+    grp = load_json("../data/G_1000_8000_0.json")
     print("successfully construction from \"G_1000_8000_0.json\" run time: ", round(time.time() - st, 3), " sec")
     st = time.time()
     nx.shortest_path(grp, 400, 700, weight='weight')
@@ -32,7 +32,7 @@ def build_1000_8000_0():
 
 def build_10000_80000_0():
     st = time.time()
-    grp = load_json("./data/G_10000_80000_0.json")
+    grp = load_json("../data/G_10000_80000_0.json")
     print("successfully construction from \"G_10000_80000_0.json\" run time: ", round(time.time() - st, 3), " sec")
     st = time.time()
     nx.shortest_path(grp, 7005, 70, weight='weight')
@@ -40,7 +40,7 @@ def build_10000_80000_0():
 
 def build_20000_160000_0():
     st = time.time()
-    grp = load_json("./data/G_20000_160000_0.json")
+    grp = load_json("../data/G_20000_160000_0.json")
     print("successfully construction from \"G_20000_160000_0.json\" run time: ", round(time.time() - st, 3), " sec")
     st = time.time()
     nx.shortest_path(grp, 5000, 15250, weight='weight')
@@ -48,7 +48,7 @@ def build_20000_160000_0():
 
 def build_30000_240000_0():
     st = time.time()
-    grp = load_json("./data/G_30000_240000_0.json")
+    grp = load_json("../data/G_30000_240000_0.json")
     print("successfully construction from \"G_30000_240000_0.json\" run time: ", round(time.time() - st, 3), " sec")
     st = time.time()
     nx.shortest_path(grp, 0, 4, weight='weight')
