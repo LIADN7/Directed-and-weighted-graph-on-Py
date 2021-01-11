@@ -2,6 +2,7 @@
 
 ***
 
+![](https://github.com/LIADN7/Directed-and-weighted-graph-on-Py/blob/master/imgs/depositphotos_200527056-stock-illustration-graph-network-logo-icon-design.jpg)
 
 the class Nodes presents the information of a node_data type
 and present all the ribs that go to and go from the mode on the graph.
