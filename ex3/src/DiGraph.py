@@ -127,8 +127,10 @@ class DiGraph(GraphInterface):
             back = self.all_in_edges_of_node(node_id).keys()
             for i in forw:
                 self.remove_edge(node_id, i)
+                self.__change -= 1
             for i in back:
                 self.remove_edge(i, node_id)
+                self.__change -= 1
             self.__nodes.pop(node_id)
             self.__nodeSize -= 1
             self.__change += 1

@@ -4,6 +4,7 @@ from ex3.src.Node import Node
 import time
 import datetime
 
+
 def create_graph():
     grp = DiGraph()
     grp.add_node(0)
@@ -120,15 +121,22 @@ class TestDiGraph(TestCase):
         self.assertEqual(grp.get_mc(), 11)
         grp.add_edge(11, 1, 2)  # the node(11) not exist
         grp.add_edge(1, 12, 2)  # the node(12) not exist
+        grp.add_edge(1, 5, 2)
+        grp.add_edge(1, 8, 2)
+        grp.add_edge(7, 1, 1)
+        grp.add_edge(7, 6, 1)
+        grp.add_edge(7, 1, 1)   # the edge already exist
+        grp.add_edge(6, 1, 1)
         grp.add_edge(5, 4, 1)
-        self.assertEqual(grp.get_mc(), 12)
-        grp.remove_node(11)  # the node(11) not exist
+        self.assertEqual(grp.get_mc(), 17)
+        grp.remove_node(11)     # the node(11) not exist
         grp.remove_node(1)
-        self.assertEqual(grp.get_mc(), 13)
+        grp.remove_node(2)
+        self.assertEqual(grp.get_mc(), 19)
         grp.remove_edge(1, 15)  # the node(15) not exist
         grp.remove_edge(5, 4)
-        grp.remove_edge(5, 2)  # the edge not exist
-        self.assertEqual(grp.get_mc(), 14)
+        grp.remove_edge(5, 2)   # the node 2 and the edge not exist
+        self.assertEqual(grp.get_mc(), 20)
 
     def test_add_edge(self):
         """
@@ -161,6 +169,7 @@ class TestDiGraph(TestCase):
         """
         grp = create_graph()
         grp.add_edge(5, 1, 1)
+        grp.add_edge(2, 5, 1)
         grp.remove_node(5)
         for i in grp:
             if i == 5:
@@ -210,20 +219,16 @@ class TestDiGraph(TestCase):
         for i in range(1000):
             for j in range(3):
                 g.add_edge(i, i + j, 1)
-        print("Graph construction 10,000 nodes run time: ", round(time.time() - st, 3) , " sec")
+        print("Graph construction 10,000 nodes run time: ", round(time.time() - st, 3), " sec")
         for i in range(10000, 100000):
             g.add_node(i)
-        for i in range(10000,100000):
+        for i in range(10000, 100000):
             for j in range(3):
                 g.add_edge(i, i + j, 1)
-        print("Graph construction 100,000 nodes run time: ", round(time.time() - st, 3) , " sec")
-        for i in range(100000,1000000):
+        print("Graph construction 100,000 nodes run time: ", round(time.time() - st, 3), " sec")
+        for i in range(100000, 1000000):
             g.add_node(i)
-        for i in range(100000,1000000):
+        for i in range(100000, 1000000):
             for j in range(3):
                 g.add_edge(i, i + j, 1)
-        print("Graph construction 1,000,000 nodes run time: ", round(time.time() - st, 3) , " sec")
-
-
-
-        return Node
+        print("Graph construction 1,000,000 nodes run time: ", round(time.time() - st, 3), " sec")
